@@ -16,6 +16,7 @@ add_library(doomlib SHARED
   things.h
   common.cpp
   common.h
+  thing.cpp thing.h
 )
 
 file(GLOB_RECURSE DL_SOURCES
