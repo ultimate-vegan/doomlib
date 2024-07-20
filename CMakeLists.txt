@@ -9,11 +9,8 @@ add_library(doomlib SHARED
   doomlib_global.h
   doomlib.cpp
   doomlib.h
-  test.cpp
   wadfile.cpp
   wadfile.h
-  things.cpp
-  things.h
   common.cpp
   common.h
   thing.cpp thing.h
@@ -24,7 +21,7 @@ file(GLOB_RECURSE DL_SOURCES
     doomlib.cpp
     common.cpp
     wadfile.cpp
-    things.cpp
+    thing.cpp
 )
 
 file(GLOB_RECURSE DL_HEADERS
@@ -32,18 +29,18 @@ file(GLOB_RECURSE DL_HEADERS
     doomlib.h
     common.h
     wadfile.h
-    things.h
+    thing.h
 )
 
-# add_executable(doomlibtest ${DL_SOURCES} ${DL_HEADERS}
-#     wadfile.h wadfile.cpp
-#     common.cpp
-#     common.h
-#     things.h things.cpp)
+add_executable(doomlibtest ${DL_SOURCES} ${DL_HEADERS}
+     wadfile.h wadfile.cpp
+     common.cpp common.h
+     thing.h thing.cpp
+     doommap.h doommap.cpp)
 
-# install(TARGETS doomlibtest
-#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-# )
+install(TARGETS doomlibtest
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
 
 target_compile_definitions(doomlib PRIVATE DOOMLIB_LIBRARY)

@@ -4,6 +4,7 @@
 WadFile::WadFile() {
     WadHeaders headers;
     vector<DirEntry> DirEntries;
+    vector<DoomMap> levels;
 }
 
 void WadFile::getHeaders(){
@@ -52,20 +53,37 @@ void WadFile::getDirEntries(){
 
         //get lump offset
         file.read(clo, 4);
-        entry.lumpoffset = dc32(clo[0],clo[1],clo[2],clo[3]);
+        entry.offset = dc32(clo[0],clo[1],clo[2],clo[3]);
         //get lump size
         file.seekg(entrypos+4);
         file.read(cls, 4);
-        entry.lumpsize = dc32(cls[0],cls[1],cls[2],cls[3]);
+        entry.size = dc32(cls[0],cls[1],cls[2],cls[3]);
         //get lump name
         file.seekg(entrypos+8);
         file.read(cln, 8);
-        entry.lumpname = cln;
+        entry.name = cln;
 
         DirEntries.push_back(entry);
 
         entrypos = entrypos + 16;
 
-        //cout<<entry.lumpname<<'\n'<<entry.lumpoffset<<'\n'<<entry.lumpsize<<'\n';
+        cout<<entry.name<<'\n'<<entry.offset<<'\n'<<entry.size<<'\n';
     }
+}
+
+void WadFile::getMaps(){
+
+    ifstream file(wadpath, ios::binary);
+    const regex pattern("E\\dM\\d");
+    smatch match;
+
+    for(auto it = DirEntries.begin(); it != DirEntries.end(); ++it){
+
+        if(regex_match(it->name, match, pattern)){
+            DoomMap map;
+            map.offset = it->offset;
+            levels.push_back(map);
+        }
+    }
+
 }

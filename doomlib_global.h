@@ -25,5 +25,6 @@
 #include <cstring>
 #include <endian.h>
 #include <cstdint>
+#include <regex>
 
 #endif // DOOMLIB_GLOBAL_H

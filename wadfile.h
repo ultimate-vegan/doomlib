@@ -2,6 +2,7 @@
 #define WADFILE_H
 
 #include "doomlib_global.h"
+#include "doommap.h"
 
 using namespace std;
 
@@ -21,11 +22,11 @@ struct WadHeaders{
 struct DirEntry{
 
     //offset to the start of the lump, first 4 bytes
-    uint32_t lumpoffset;
+    uint32_t offset;
     //size of the lump in bytes, second 4 bytes
-    uint32_t lumpsize;
+    uint32_t size;
     //lump name, 8 byte ascii string
-    string lumpname;
+    string name;
 
 };
 
@@ -35,9 +36,11 @@ public:
     WadFile();
     void getHeaders();
     void getDirEntries();
+    void getMaps();
 
     WadHeaders headers;
     vector<DirEntry> DirEntries;
+    vector<DoomMap> levels;
 
     string wadpath;
     ifstream file;

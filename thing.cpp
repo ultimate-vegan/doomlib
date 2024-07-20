@@ -1,4 +1,8 @@
-#include "things.h"
+#include "thing.h"
 
 
-things::things() {}
+Thing::Thing() {
+
+
+
+}
