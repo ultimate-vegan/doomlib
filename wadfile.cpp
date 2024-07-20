@@ -1,5 +1,6 @@
 #include "wadfile.h"
 #include "common.h"
+#include "doommap.h"
 
 WadFile::WadFile() {
     WadHeaders headers;
